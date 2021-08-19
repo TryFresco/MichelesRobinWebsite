@@ -39,36 +39,144 @@
 
                     <br>
 
+                    <script>
+
+                        var day = false;
+                        var evening = false;
+                        var week = false;
+                        var weekend = false;
+                        var nice = false;
+                        var bad = false;
+
+
+
+
+                        $(document).ready(function () {
+                            $("#day").click(function () {
+                                day = true;
+                                evening = false;
+                                $("#zeit").text("Tag");
+
+                            });
+                        });
+
+
+
+                        $(document).ready(function () {
+                            $("#evening").click(function () {
+                                day = false;
+                                evening = true;
+                                $("#zeit").text("Abend");
+
+
+                            });
+                        });
+
+
+
+                        $(document).ready(function () {
+                            $("#week").click(function () {
+                                week = true;
+                                weekend = false;
+                                $("#wochentag").text("Woche");
+
+
+                            });
+                        });
+
+
+
+                        $(document).ready(function () {
+                            $("#weekend").click(function () {
+                                weekend = true;
+                                week = false;
+                                $("#wochentag").text("Wochenende");
+
+
+                            });
+                        });
+
+
+
+                        $(document).ready(function () {
+                            $("#nice").click(function () {
+                                nice = true;
+                                bad = false;
+                                $("#wetter").text("schön");
+
+
+                            });
+                        });
+
+
+
+                        $(document).ready(function () {
+                            $("#bad").click(function () {
+                                bad = true;
+                                nice = false;
+                                $("#wetter").text("schlecht");
+
+
+                            });
+                        });
+
+
+
+                        $(document).ready(function () {
+                            $(".button").click(function () {
+                                
+
+                            });
+                        });
+
+
+
+
+
+                    </script>
+
                     <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" id="menu1" type="button"
-                            data-toggle="dropdown">Zeit
+                        <button class="btn btn-primary dropdown-toggle" id="zeit" type="button" data-toggle="dropdown">Zeit
                             <span class="caret"></span></button>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Abend</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Tag</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" id="evening">Abend</a>
+                            </li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" id="day">Tag</a></li>
                         </ul>
                     </div>
 
+                    <p></p>
 
                     <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" id="menu1" type="button"
+                        <button class="btn btn-primary dropdown-toggle" id="wochentag" type="button"
                             data-toggle="dropdown">Wochentag
                             <span class="caret"></span></button>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Wochenende</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Unter der Woche</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#"
+                                    id="weekend">Wochenende</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#" id="week">Unter der
+                                    Woche</a></li>
                         </ul>
                     </div>
 
+                    <p></p>
+
                     <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" id="menu1" type="button"
+                        <button class="btn btn-primary dropdown-toggle" id="wetter" type="button"
                             data-toggle="dropdown">Wetter
                             <span class="caret"></span></button>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">schön</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">schlecht</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" id="nice">schön</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" id="bad">schlecht</a></li>
                         </ul>
                     </div>
+
+                    <p></p>
+
+                    <button class="button">Suchen</button>
+
+
+
 
                 </div>
 
