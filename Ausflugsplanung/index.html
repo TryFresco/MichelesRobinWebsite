@@ -41,22 +41,17 @@
 
                     <script>
 
-                        var day = false;
-                        var evening = false;
-                        var week = false;
-                        var weekend = false;
-                        var nice = false;
-                        var bad = false;
+                        var day;
+                        var week;
+                        var weather;
 
 
 
 
                         $(document).ready(function () {
                             $("#day").click(function () {
-                                day = true;
-                                evening = false;
+                                day = "tag";
                                 $("#zeit").text("Tag");
-
                             });
                         });
 
@@ -64,11 +59,8 @@
 
                         $(document).ready(function () {
                             $("#evening").click(function () {
-                                day = false;
-                                evening = true;
+                                day = "nacht";
                                 $("#zeit").text("Abend");
-
-
                             });
                         });
 
@@ -76,11 +68,8 @@
 
                         $(document).ready(function () {
                             $("#week").click(function () {
-                                week = true;
-                                weekend = false;
+                                week = "nein";
                                 $("#wochentag").text("Woche");
-
-
                             });
                         });
 
@@ -88,11 +77,8 @@
 
                         $(document).ready(function () {
                             $("#weekend").click(function () {
-                                weekend = true;
-                                week = false;
+                                week = "ja";
                                 $("#wochentag").text("Wochenende");
-
-
                             });
                         });
 
@@ -100,11 +86,8 @@
 
                         $(document).ready(function () {
                             $("#nice").click(function () {
-                                nice = true;
-                                bad = false;
-                                $("#wetter").text("schön");
-
-
+                                weather = "gut";
+                                $("#wetter").text("Schön");
                             });
                         });
 
@@ -112,22 +95,66 @@
 
                         $(document).ready(function () {
                             $("#bad").click(function () {
-                                bad = true;
-                                nice = false;
-                                $("#wetter").text("schlecht");
-
-
+                                weather = "schlecht";
+                                $("#wetter").text("Schlecht");
                             });
                         });
 
 
 
                         $(document).ready(function () {
-                            $(".button").click(function () {
-                                
-
+                            $("#allWetter").click(function () {
+                                weather = "all";
+                                $("#wetter").text("Egal");
                             });
                         });
+
+                        $(document).ready(function () {
+                            $("#allWoche").click(function () {
+                                week = "all";
+                                $("#wochentag").text("Egal");
+                            });
+                        });
+
+                        $(document).ready(function () {
+                            $("#allZeit").click(function () {
+                                day = "all";
+                                $("#zeit").text("Egal");
+                            });
+                        });
+
+                       
+
+
+
+                        $(document).ready(function () {
+                            $(".button").click(function () {
+                                empty();
+                                $.getJSON('events.json', function (data) {
+
+                                    $.each(data.items, function (key, val) {
+                                        if ((val.weather == weather || weather == "all") && (val.time == day || day == "all") && (val.open == week || week == "all")){
+                                            var name = val.name;
+                                            var weather = val.weather;
+                                            console.log(val.name);
+                                            $('#ausgabe').append(`<p class="new-row"> ${name}, ${}</p>`);
+                                        }
+
+
+
+                                    })
+                                }
+                                )
+                            })
+
+                        });
+
+                        function empty(){
+                            var collection = $(".new-row").each(function(){
+                                $(this).remove();
+                            })
+                        }
+
 
 
 
@@ -136,12 +163,14 @@
                     </script>
 
                     <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" id="zeit" type="button" data-toggle="dropdown">Zeit
+                        <button class="btn btn-primary dropdown-toggle" id="zeit" type="button"
+                            data-toggle="dropdown">Zeit
                             <span class="caret"></span></button>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
                             <li role="presentation"><a role="menuitem" tabindex="-1" id="evening">Abend</a>
                             </li>
                             <li role="presentation"><a role="menuitem" tabindex="-1" id="day">Tag</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" id="allZeit">Egal</a></li>
                         </ul>
                     </div>
 
@@ -156,6 +185,8 @@
                                     id="weekend">Wochenende</a></li>
                             <li role="presentation"><a role="menuitem" tabindex="-1" href="#" id="week">Unter der
                                     Woche</a></li>
+
+                            <li role="presentation"><a role="menuitem" tabindex="-1" id="allWoche">Egal</a></li>
                         </ul>
                     </div>
 
@@ -168,12 +199,19 @@
                         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
                             <li role="presentation"><a role="menuitem" tabindex="-1" id="nice">schön</a></li>
                             <li role="presentation"><a role="menuitem" tabindex="-1" id="bad">schlecht</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" id="allWetter">Egal</a></li>
                         </ul>
                     </div>
 
                     <p></p>
 
                     <button class="button">Suchen</button>
+
+                    <p></p>
+                    <p></p>
+                    <p></p>
+
+                    <p id="ausgabe"></p>
 
 
 
